@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Clone repo
+mkdir -p ./tmp/
+rm -rf ./tmp/master
+git clone --depth 1 http://github.com/ember-montevideo/meetups.git ./tmp/master &> /dev/null
+
+# Copy meetup files
+for folder in `ls -1 -F ./tmp/master | sed -n '/\//{;s/\///;p;}'`; do
+  mkdir -p "${folder}"
+
+  cat "./tmp/master/${folder}/README.md" \
+    | ./bin/Markdown.pl > "./${folder}/index.html.fragment"
+
+  m4 \
+    --include=layout/ \
+    --define TITLE="Meetup ${folder}" \
+    --define ARTICLE="./${folder}/index.html.fragment" \
+    layout/page.html > "./${folder}/index.html"
+
+  cp ./tmp/master/${folder}/*.jpg "./${folder}/" 2> /dev/null
+  cp ./tmp/master/${folder}/*.png "./${folder}/" 2> /dev/null
+done
+
+# Copy index file
+cat ./tmp/master/README.md \
+  | sed "s/README.md/index.html/" \
+  | ./bin/Markdown.pl > "./index.html.fragment"
+
+m4 \
+  --include=layout/ \
+  --define ARTICLE="./index.html.fragment" \
+  layout/index.html > "./index.html"
+
+cp ./tmp/master/*.jpg ./ 2> /dev/null
+cp ./tmp/master/*.png ./ 2> /dev/null
+
+# Cleanup
+find . -name "*fragment" -delete
