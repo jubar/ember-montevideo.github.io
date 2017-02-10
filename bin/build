@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 
-# Clone repo
+function step() {
+  echo "* $1"
+}
+
 function autolink() {
   sed  -E 's/[^(](https?:\/\/([^ ]|$)+)/<a href="\1">\1<\/a>/g'
 }
 
+step "Clonning meetup notes repo"
 mkdir -p ./tmp/
 rm -rf ./tmp/master
-git clone --depth 1 http://github.com/ember-montevideo/meetups.git ./tmp/master &> /dev/null
+git clone --depth 1 http://github.com/ember-montevideo/meetups.git ./tmp/master &>/dev/null
 
-# Copy meetup files
+step "Copying meetup files"
 for folder in `ls -1 -F ./tmp/master | sed -n '/\//{;s/\///;p;}'`; do
   mkdir -p "${folder}"
 
@@ -27,7 +31,7 @@ for folder in `ls -1 -F ./tmp/master | sed -n '/\//{;s/\///;p;}'`; do
   cp ./tmp/master/${folder}/*.png "./${folder}/" 2> /dev/null
 done
 
-# Copy index file
+step "Copying index file"
 cat ./tmp/master/README.md \
   | sed "s/README.md/index.html/" \
   | ./bin/Markdown.pl > "./index.html.fragment"
@@ -37,8 +41,11 @@ m4 \
   --define ARTICLE="./index.html.fragment" \
   layout/index.html > "./index.html"
 
+step "Copying index images"
 cp ./tmp/master/*.jpg ./ 2> /dev/null
 cp ./tmp/master/*.png ./ 2> /dev/null
 
-# Cleanup
+step "Cleanning up"
 find . -name "*fragment" -delete
+
+echo "Done."
