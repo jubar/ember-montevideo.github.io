@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 # Clone repo
+function autolink() {
+  sed  -E 's/[^(](https?:\/\/([^ ]|$)+)/<a href="\1">\1<\/a>/g'
+}
+
 mkdir -p ./tmp/
 rm -rf ./tmp/master
 git clone --depth 1 http://github.com/ember-montevideo/meetups.git ./tmp/master &> /dev/null
@@ -10,6 +14,7 @@ for folder in `ls -1 -F ./tmp/master | sed -n '/\//{;s/\///;p;}'`; do
   mkdir -p "${folder}"
 
   cat "./tmp/master/${folder}/README.md" \
+    | autolink \
     | ./bin/Markdown.pl > "./${folder}/index.html.fragment"
 
   m4 \
