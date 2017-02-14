@@ -1,6 +1,7 @@
 body {
   font-family: Georgia;
-  background-color: transparent;
+  background: #001f3f;
+  background: linear-gradient(to bottom, #001f3f 0%,#0074d9 100%);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -39,6 +40,7 @@ article {
   text-align: start;
   word-wrap: break-word;
   text-rendering: optimizeLegibility;
+  background: white;
   box-shadow: 0px 6px 12px 3px rgba(0, 0, 0, 0.2);
 
   box-sizing: border-box;
@@ -54,6 +56,10 @@ article img {
   margin: 0.5em auto;
   display: block;
   width: 100%;
+}
+
+.main img {
+  width: 200px;
 }
 
 a {
@@ -116,4 +122,15 @@ table th {
 
 li li {
     white-space: pre-wrap;
+}
+
+footer {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0,0,0,.2);
+  text-align: right;
+}
+
+.main > p:first-of-type {
+  text-align: center;
 }
