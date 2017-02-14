@@ -1,7 +1,3 @@
-include(_header.html)
-<article>
-  changequote(<!*,*!>)
-  include(ARTICLE)
-  changequote(`,')
-</article>
-include(_footer.html)
+include(_header.html)dnl
+undivert(ARTICLE)dnl
+include(_footer.html)dnl

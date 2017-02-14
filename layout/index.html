@@ -1,9 +1,4 @@
-define(TITLE, Ember Montevideo)
-
-include(_header.html)
-<article>
-  changequote(<!*,*!>)
-  include(ARTICLE)
-  changequote(`,')
-</article>
-include(_footer.html)
+define(TITLE, Ember Montevideo)dnl
+include(_header.html)dnl
+undivert(ARTICLE)dnl
+include(_footer.html)dnl

@@ -23,6 +23,7 @@ for folder in `ls -1 -F ./tmp/master | sed -n '/\//{;s/\///;p;}'`; do
 
   m4 \
     --include=layout/ \
+    --define CSSCLASS="meetup" \
     --define TITLE="Meetup ${folder}" \
     --define ARTICLE="./${folder}/index.html.fragment" \
     layout/page.html > "./${folder}/index.html"
@@ -38,6 +39,7 @@ cat ./tmp/master/README.md \
 
 m4 \
   --include=layout/ \
+  --define CSSCLASS="main" \
   --define ARTICLE="./index.html.fragment" \
   layout/index.html > "./index.html"
 
