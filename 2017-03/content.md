@@ -18,3 +18,14 @@
 * [telling-stories ember addon](https://github.com/mvdwg/telling-stories)
 * [ember-bluetooth ember addon by Federico Kauffman](https://github.com/wyeworks/ember-bluetooth)
 * [ember-web-app ember addon by Santiago Ferreira](https://github.com/san650/ember-web-app)
+
+### Novedades
+
+#### Core
+
+* ember v2.11.3 released!
+[https://github.com/emberjs/ember.js/releases/tag/v2.11.3](https://github.com/emberjs/ember.js/releases/tag/v2.11.3)
+
+
+* 2017 Ember community survey
+[http://emberjs.com/blog/2017/02/28/2017-ember-community-survey.html](http://emberjs.com/blog/2017/02/28/2017-ember-community-survey.html)
